@@ -54,3 +54,27 @@ section {
     box-shadow: 0 0 5px #51eeee,0 0 25px #51eeee,0 0 50px #51eeee,0 0 75px #51eeee;
 
 }
+.zornet_ru a {
+    display:block;
+    width:100px;
+    margin:auto;
+    padding: 9px 17px;
+    background:#51eeee;
+    color:#000;
+    text-decoration:none;
+    font-size:17px;
+    text-align: center;
+    border: 2px solid #c5baba;
+    border-radius: 34px;
+  }
+  
+  .zornet_ru a:hover {
+    color:#fff!important;
+    text-decoration:none!important;
+    background:#51eeee;
+  }
+#x{
+  position:fixed;
+  bottom:0;
+  width:200px
+}

@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box; 
-    background: #001d30;
+    
 
 }
 section {
@@ -59,7 +59,7 @@ section {
     width:100px;
     margin:auto;
     padding: 9px 17px;
-    color:#000;
+    color:#fff;
     text-decoration:none;
     font-size:17px;
     text-align: center;
@@ -70,7 +70,6 @@ section {
   .zornet_ru a:hover {
     color:#fff!important;
     text-decoration:none!important;
-    background:#2f3636;
   }
 #x{
   position:fixed;

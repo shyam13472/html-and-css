@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<script src='source/three.min.js'></script>
+<script src='source/threex.planets.js'></script>
+<script src='source/threex.atmospherematerial.js'></script>
+<script src='source/customControls.js'></script>
+<script src='source/TrackballControls.js'></script>
+<!-- include for threex.glowdatgui -->
+<script src='source/dat.gui.min.js'></script>
+<script src="source/threex.atmospheredatgui.js"></script>
+<body style="margin: 0 auto; overflow: hidden;background:url('https://www.solarsystemscope.com/Images/textures/textures-full/2k_stars_milky_way.jpg');">
+
+<script>
+	
+	var width  	= 1108,
+    height 		= 800;
+	setWindowHalf(width,height);
+	var scene = new THREE.Scene();
+	var camera = new THREE.PerspectiveCamera(55, width / height, 0.01, 5000);
+	camera.position.z = 2.2;
+	var renderer = new THREE.WebGLRenderer({
+		antialias	: true,
+		alpha : true
+	});
+	renderer.setSize(width, height);
+	document.body.appendChild( renderer.domElement );
+	renderer.shadowMapEnabled = true
+	var onRenderFcts= [];
+	var light	= new THREE.AmbientLight( 0x011111 )
+	scene.add( light )
+	var containerLight	= new THREE.Object3D()
+	containerLight.rotation.y = 1.2;
+	containerLight.rotation.x = -0.2;
+	scene.add(containerLight)
+	var light	= new THREE.DirectionalLight( 0xffffff, 1.2 )
+	light.position.set(0,0,5)
+	containerLight.add( light )
+	light.castShadow	= true
+	light.shadowCameraNear	= 0.01
+	light.shadowCameraFar	= 15
+	light.shadowCameraFov	= 45
+	light.shadowCameraLeft	= -1
+	light.shadowCameraRight	=  1
+	light.shadowCameraTop	=  1
+	light.shadowCameraBottom= -1
+	light.shadowBias	= 0.001
+	light.shadowDarkness	= 0.05
+	light.shadowMapWidth	= 1024
+	light.shadowMapHeight	= 1024
+	var containerEarth	= new THREE.Object3D()
+	scene.add(containerEarth)
+	var earthMesh = THREEx.Planets.createUranus()
+	earthMesh.receiveShadow	= true
+	earthMesh.castShadow	= true
+	containerEarth.add(earthMesh)
+	var geometry	= new THREE.SphereGeometry(0.47, 32, 32)
+	var material	= THREEx.createAtmosphereMaterial()
+	material.side	= THREE.BackSide
+	material.uniforms.glowColor.value.set(0xa5d7dc)
+	material.uniforms.coeficient.value	= 0.5
+	material.uniforms.power.value		= 9.9
+	var mesh	= new THREE.Mesh(geometry, material );
+	mesh.scale.multiplyScalar(1.1);
+	containerEarth.add( mesh );
+	containerEarth.rotateZ(-97.7 * Math.PI/180);
+var ring	= THREEx.Planets.createUranusRing()
+		ring.receiveShadow	= true
+		ring.castShadow		= true
+		earthMesh.add(ring)	
+	render();
+	function render() {
+		update();
+	
+	    requestAnimationFrame(render);
+		renderer.render(scene, camera);
+		
+	}
+	
+</script></body>
